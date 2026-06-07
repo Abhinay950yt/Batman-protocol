@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦇 Batman Protocol - Master Your Life</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="app-container">
+        
+        <!-- ==================== SIDEBAR ==================== -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-mask"></i>
+                    <span>BATMAN</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" onclick="switchScreen('dashboard')">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-item" onclick="switchScreen('checklist')">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Tasks</span>
+                </button>
+                <button class="nav-item" onclick="switchScreen('goals')">
+                    <i class="fas fa-bullseye"></i>
+                    <span>Goals</span>
+                </button>
+                <button class="nav-item" onclick="switchScreen('habits')">
+                    <i class="fas fa-fire-alt"></i>
+                    <span>Habits</span>
+                </button>
+                <button class="nav-item" onclick="switchScreen('analytics')">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </button>
+                <button class="nav-item" onclick="switchScreen('settings')">
+                    <i class="fas fa-sliders-h"></i>
+                    <span>Settings</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="streak-badge">
+                    <i class="fas fa-fire"></i>
+                    <span id="streakDisplay">0 days</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ==================== MAIN CONTENT ==================== -->
+        <main class="main-content">
+            
+            <!-- ==================== DASHBOARD ==================== -->
+            <section id="dashboard" class="screen active">
+                <div class="screen-header">
+                    <div>
+                        <h1>Welcome Back, <span id="userName">Batman</span> 🦇</h1>
+                        <p id="greetingMsg">Ready to conquer the day?</p>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>📊 Today's Progress</h3>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <p id="progressText">0% Complete</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🎖️ Quick Stats</h3>
+                        <div class="stat-list">
+                            <div class="stat-item">
+                                <span>Tasks Today</span>
+                                <strong id="tasksCompleted">0/0</strong>
+                            </div>
+                            <div class="stat-item">
+                                <span>Streak</span>
+                                <strong id="dailyStreak">0 🔥</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🎯 Your Mission</h3>
+                    <div class="grid-3">
+                        <div class="mission-item">
+                            <div class="mission-label">💪 Health</div>
+                            <div class="mission-bar">
+                                <div class="mission-progress" id="healthProgress" style="width: 0%"></div>
+                            </div>
+                            <p id="healthGoalText">Not set</p>
+                        </div>
+                        <div class="mission-item">
+                            <div class="mission-label">💰 Wealth</div>
+                            <div class="mission-bar">
+                                <div class="mission-progress" id="wealthProgress" style="width: 0%"></div>
+                            </div>
+                            <p id="wealthGoalText">Not set</p>
+                        </div>
+                        <div class="mission-item">
+                            <div class="mission-label">🚀 Main Goal</div>
+                            <div class="mission-bar">
+                                <div class="mission-progress" id="mainProgress" style="width: 0%"></div>
+                            </div>
+                            <p id="mainGoalText">Not set</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card motivation-card">
+                    <h3>✨ Daily Motivation</h3>
+                    <p id="motivationQuote" class="quote">"Speak less. Think more. Act decisively."</p>
+                    <button class="btn btn-secondary" onclick="getNewQuote()">
+                        <i class="fas fa-magic"></i> New Inspiration
+                    </button>
+                </div>
+            </section>
+
+            <!-- ==================== TASKS ==================== -->
+            <section id="checklist" class="screen">
+                <div class="screen-header">
+                    <h1><i class="fas fa-tasks"></i> Daily Tasks</h1>
+                    <button class="btn btn-primary" onclick="openAddTaskModal()">
+                        <i class="fas fa-plus"></i> Add Task
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div id="tasksList" class="task-list">
+                        <p class="empty-state">
+                            <i class="fas fa-inbox" style="font-size: 40px; margin-bottom: 10px; opacity: 0.5;"></i><br>
+                            No tasks yet. Create your first task!
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== GOALS ==================== -->
+            <section id="goals" class="screen">
+                <div class="screen-header">
+                    <h1><i class="fas fa-bullseye"></i> Your Goals</h1>
+                </div>
+
+                <div class="grid-3">
+                    <div class="card goal-card">
+                        <h3>💪 Health Goal</h3>
+                        <div class="form-group">
+                            <input type="text" id="healthGoalInput" placeholder="e.g., Build muscle">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" id="healthGoalProgressInput" placeholder="Progress %" min="0" max="100">
+                        </div>
+                        <button class="btn btn-primary" onclick="saveGoal('health')">
+                            <i class="fas fa-save"></i> Save Goal
+                        </button>
+                    </div>
+
+                    <div class="card goal-card">
+                        <h3>💰 Wealth Goal</h3>
+                        <div class="form-group">
+                            <input type="text" id="wealthGoalInput" placeholder="e.g., Earn $5K/month">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" id="wealthGoalProgressInput" placeholder="Progress %" min="0" max="100">
+                        </div>
+                        <button class="btn btn-primary" onclick="saveGoal('wealth')">
+                            <i class="fas fa-save"></i> Save Goal
+                        </button>
+                    </div>
+
+                    <div class="card goal-card">
+                        <h3>🚀 Main Goal</h3>
+                        <div class="form-group">
+                            <input type="text" id="mainGoalInput" placeholder="e.g., Launch startup">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" id="mainGoalProgressInput" placeholder="Progress %" min="0" max="100">
+                        </div>
+                        <button class="btn btn-primary" onclick="saveGoal('main')">
+                            <i class="fas fa-save"></i> Save Goal
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== HABITS ==================== -->
+            <section id="habits" class="screen">
+                <div class="screen-header">
+                    <h1><i class="fas fa-fire-alt"></i> Habit Tracker</h1>
+                    <button class="btn btn-primary" onclick="openAddHabitModal()">
+                        <i class="fas fa-plus"></i> Add Habit
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div id="habitsList" class="habits-grid">
+                        <p class="empty-state">
+                            <i class="fas fa-spa" style="font-size: 40px; margin-bottom: 10px; opacity: 0.5;"></i><br>
+                            No habits yet. Add your first habit!
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== ANALYTICS ==================== -->
+            <section id="analytics" class="screen">
+                <div class="screen-header">
+                    <h1><i class="fas fa-chart-line"></i> Analytics & Insights</h1>
+                </div>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>📊 Performance Metrics</h3>
+                        <div class="stat-item-large">
+                            <span>Tasks Completed</span>
+                            <strong id="analyticsTasksToday">0</strong>
+                        </div>
+                        <div class="stat-item-large">
+                            <span>Completion Rate</span>
+                            <strong id="analyticsCompletion">0%</strong>
+                        </div>
+                        <div class="stat-item-large">
+                            <span>Streak</span>
+                            <strong id="analyticsStreak">0 🔥</strong>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>📈 Weekly Performance</h3>
+                        <div class="week-chart">
+                            <div class="week-item">
+                                <span>Mon</span>
+                                <div class="bar" style="height: 60%"></div>
+                            </div>
+                            <div class="week-item">
+                                <span>Tue</span>
+                                <div class="bar" style="height: 70%"></div>
+                            </div>
+                            <div class="week-item">
+                                <span>Wed</span>
+                                <div class="bar" style="height: 80%"></div>
+                            </div>
+                            <div class="week-item">
+                                <span>Thu</span>
+                                <div class="bar" style="height: 75%"></div>
+                            </div>
+                            <div class="week-item">
+                                <span>Fri</span>
+                                <div class="bar" style="height: 90%"></div>
+                            </div>
+                            <div class="week-item">
+                                <span>Sat</span>
+                                <div class="bar" style="height: 85%"></div>
+                            </div>
+                            <div class="week-item">
+                                <span>Sun</span>
+                                <div class="bar" style="height: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== SETTINGS ==================== -->
+            <section id="settings" class="screen">
+                <div class="screen-header">
+                    <h1><i class="fas fa-sliders-h"></i> Settings</h1>
+                </div>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>👤 Profile Settings</h3>
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Your Name</label>
+                            <input type="text" id="settingName" placeholder="Enter your name" value="Batman">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-birthday-cake"></i> Age</label>
+                            <input type="number" id="settingAge" placeholder="Enter your age">
+                        </div>
+                        <button class="btn btn-primary" onclick="saveProfile()">
+                            <i class="fas fa-check"></i> Save Profile
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <h3>🔔 Notifications</h3>
+                        <div class="toggle-group">
+                            <div class="toggle-item">
+                                <span><i class="fas fa-sun"></i> Morning Reminder</span>
+                                <label class="toggle">
+                                    <input id="notifMorning" type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-item">
+                                <span><i class="fas fa-moon"></i> Evening Reminder</span>
+                                <label class="toggle">
+                                    <input id="notifEvening" type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>⚠️ Danger Zone</h3>
+                    <p style="margin-bottom: 20px; color: var(--text-secondary);">
+                        <i class="fas fa-exclamation-triangle"></i> This action cannot be undone
+                    </p>
+                    <button class="btn btn-danger" onclick="if(confirm('Are you sure? This will delete ALL data!')) clearAllData()">
+                        <i class="fas fa-trash"></i> Clear All Data
+                    </button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ==================== MODALS ==================== -->
+    
+    <!-- ADD TASK MODAL -->
+    <div id="addTaskModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus-circle"></i> Add New Task</h2>
+                <button class="modal-close" onclick="closeModal('addTaskModal')">×</button>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-heading"></i> Task Name</label>
+                <input id="taskNameInput" type="text" placeholder="e.g., Morning meditation">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-tag"></i> Category</label>
+                <select id="taskCategoryInput">
+                    <option value="morning">🌅 Morning</option>
+                    <option value="work">💼 Work</option>
+                    <option value="exercise">💪 Exercise</option>
+                    <option value="evening">🌙 Evening</option>
+                    <option value="other">📌 Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-hourglass-half"></i> Duration (minutes)</label>
+                <input id="taskDurationInput" type="number" placeholder="30" value="30" min="1">
+            </div>
+            <button class="btn btn-primary btn-block" onclick="addTask()">
+                <i class="fas fa-check-circle"></i> Add Task
+            </button>
+        </div>
+    </div>
+
+    <!-- ADD HABIT MODAL -->
+    <div id="addHabitModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-fire"></i> Add New Habit</h2>
+                <button class="modal-close" onclick="closeModal('addHabitModal')">×</button>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-signature"></i> Habit Name</label>
+                <input id="habitNameInput" type="text" placeholder="e.g., Morning exercise">
+            </div>
+            <button class="btn btn-primary btn-block" onclick="addHabit()">
+                <i class="fas fa-check-circle"></i> Add Habit
+            </button>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/notifications.js"></script>
+</body>
+</html>

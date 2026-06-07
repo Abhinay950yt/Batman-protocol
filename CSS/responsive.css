@@ -1,0 +1,185 @@
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 240px;
+    }
+
+    .grid-2,
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .mission-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .main-content {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-header {
+        margin-bottom: 0;
+    }
+
+    .sidebar-nav {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: linear-gradient(180deg, #1A1A2E 0%, #0F0F1E 100%);
+        flex-direction: column;
+        z-index: 999;
+        border-bottom: 1px solid var(--border);
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+    }
+
+    .sidebar-nav.active {
+        display: flex;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+    .main-content {
+        height: calc(100vh - 60px);
+        padding: 20px;
+    }
+
+    .screen-header h1 {
+        font-size: 28px;
+    }
+
+    .screen-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .card {
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+
+    .grid-2,
+    .grid-3 {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .mission-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .task-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .task-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 25px;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    .stat-list {
+        gap: 12px;
+    }
+
+    .week-chart {
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        padding: 12px;
+    }
+
+    .logo span {
+        display: none;
+    }
+
+    .nav-item span {
+        display: none;
+    }
+
+    .nav-item {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .screen-header h1 {
+        font-size: 22px;
+    }
+
+    .card h3 {
+        font-size: 18px;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    .grid-2,
+    .grid-3 {
+        gap: 12px;
+    }
+
+    .btn {
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+
+    .quote {
+        font-size: 16px;
+    }
+
+    .modal-content {
+        padding: 20px;
+        max-height: 85vh;
+    }
+
+    .week-chart {
+        height: 150px;
+        padding: 15px;
+    }
+
+    .mission-grid {
+        gap: 12px;
+    }
+}
